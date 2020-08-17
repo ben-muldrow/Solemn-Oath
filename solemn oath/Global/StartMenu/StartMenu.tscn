@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Global/StartMenu/StartMenu.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/title.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/backgroundTile2.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.987342, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 122, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.01
+orbit_velocity_random = 0.0
+radial_accel = 13.79
+radial_accel_random = 1.0
+damping = 31.03
+damping_random = 0.98
+angle = 90.0
+angle_random = 1.0
+scale = 5.0
+scale_random = 0.48
+scale_curve = SubResource( 4 )
+color = Color( 0.478431, 0.266667, 0.290196, 1 )
+
+[node name="StartMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 2 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0.270508, 0.265625, 0.5, 1 )
+margin_right = 280.0
+margin_bottom = 168.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 128, 144 )
+lifetime = 2.5
+process_material = SubResource( 5 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 256.0
+margin_bottom = 144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 56.0
+margin_top = 17.0
+margin_right = 200.0
+margin_bottom = 127.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+modulate = Color( 0.858824, 0.898039, 0.164706, 1 )
+margin_right = 144.0
+margin_bottom = 64.0
+texture = ExtResource( 3 )
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 144.0
+margin_bottom = 87.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "start"
+flat = true
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 91.0
+margin_right = 144.0
+margin_bottom = 110.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "quit"
+flat = true
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
