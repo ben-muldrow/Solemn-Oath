@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Character.gd"
+}, {
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://State.gd"
 } ]
 _global_script_class_icons={
+"Character": "",
 "State": ""
 }
 
@@ -27,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Global/Global.gd"
+DialogManager="*res://Global/DialogManager.gd"
 
 [display]
 
@@ -35,6 +42,10 @@ window/size/height=144
 window/size/test_width=1024
 window/size/test_height=600
 window/stretch/mode="2d"
+
+[gui]
+
+theme/custom_font="res://assets/font/m5x7.tres"
 
 [input]
 

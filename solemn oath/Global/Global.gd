@@ -6,3 +6,9 @@ func _notification(what):
 
 func quitGame():
 	notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+
+func pauseGame():
+	get_tree().paused = true
+
+func unPause():
+	get_tree().paused = false

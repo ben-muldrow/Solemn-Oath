@@ -1,6 +1,7 @@
 extends Node
 
 onready var StartMenu = load("Global/StartMenu/StartMenu.tscn")
+onready var Dialog = load("Global/Dialog/Dialog.tscn")
 onready var World = load("World/World.tscn")
 
 var currentMenu = null
@@ -41,4 +42,4 @@ func removeWorld():
 	
 func startGame():
 	switchWorld(World.instance())
-	removeMenu()
+	switchMenu(Dialog.instance())

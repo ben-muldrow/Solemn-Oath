@@ -2,6 +2,8 @@ extends State
 
 var direction = Vector2()
 
+onready var CharacterManager = get_node("../../CharacterManager")
+
 func _init():
 	isActive = false
 	hasAnimation = true
@@ -9,7 +11,7 @@ func _init():
 	pass
 
 func _ready():
-	sprite = owner.get_node("PlayerSprite")
+	sprite = CharacterManager.getSprite()
 
 func onEnter():
 	.onEnter()
@@ -20,15 +22,7 @@ func _physics_process(delta):
 		owner.direction = direction
 		if (direction == Vector2.ZERO):
 			emit_signal("complete")
-		elif (direction.x < 0 && !sprite.flip_h):
-			onFlip()
-		elif (direction.x > 0 && sprite.flip_h):
-			onFlip()
 
 func onExit():
 	.onExit()
-	pass
-
-func onFlip():
-	.onFlip()
 	pass

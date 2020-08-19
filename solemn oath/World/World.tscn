@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/textures/Candle.png" type="Texture" id=3]
-[ext_resource path="res://assets/textures/player/old.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/player/old.png" type="Texture" id=3]
+[ext_resource path="res://World/WorldScript.gd" type="Script" id=4]
 [ext_resource path="res://assets/textures/doorway.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/colored_transparent_packed.png" type="Texture" id=6]
+[ext_resource path="res://World/Candle.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -17,7 +18,17 @@ glow_bloom = 0.16
 a = Vector2( -6, -7 )
 b = Vector2( 8, -7 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 23, 136 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 20, 10 )
+
 [node name="World" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="background" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -29,31 +40,14 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 1, 0, 65538, 65537, 0, 65538, 131073, 0, 65538, 196608, 0, 65537, 196609, 0, 65538, 262145, 0, 65538, 327681, 0, 65538, 393217, 0, 65538, 393220, 0, 393219, 393221, 0, 393220, 393222, 0, 393221, 458753, 0, 65538, 524288, 0, 65537, 524289, 0, 65538, 589825, 0, 262144, 589826, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589832, 0, 1, 589833, 0, 1, 589834, 0, 1, 589835, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 589840, 0, 1, 589841, 0, 1, 589842, 0, 1, 589843, 0, 1, 589844, 0, 1, 589845, 0, 1, 589846, 0, 1, 589847, 0, 1, 589848, 0, 1, 589849, 0, 1, 589850, 0, 1, 589851, 0, 2, 589861, 0, 0, 589862, 0, 1, 589863, 0, 1, 589864, 0, 1, 589865, 0, 1, 589866, 0, 1, 589867, 0, 1, 589868, 0, 1, 589869, 0, 1, 589870, 0, 1, 655366, 0, 65537, 655367, 0, 65537, 655377, 0, 65537, 655387, 0, 65538, 655397, 0, 65536, 655398, 0, 65537, 655401, 0, 65537, 720922, 0, 65537, 720923, 0, 65538, 720933, 0, 65536, 786459, 0, 65538, 786466, 0, 0, 786467, 0, 1, 786468, 0, 1, 786469, 0, 262145, 851995, 0, 65538, 852002, 0, 65536, 852003, 0, 65537, 917531, 0, 262144, 917532, 0, 1, 917533, 0, 1, 917534, 0, 1, 917535, 0, 1, 917536, 0, 1, 917537, 0, 1, 917538, 0, 262145, 983070, 0, 65537 )
+tile_data = PoolIntArray( 1, 0, 65538, 44, 0, 65536, 65537, 0, 65538, 65580, 0, 65536, 131073, 0, 65538, 131116, 0, 65536, 196608, 0, 65537, 196609, 0, 65538, 196652, 0, 65536, 262145, 0, 65538, 262188, 0, 65536, 327681, 0, 65538, 327724, 0, 65536, 393217, 0, 65538, 393220, 0, 393219, 393221, 0, 393220, 393222, 0, 393221, 393260, 0, 65536, 458752, 0, 196608, 458753, 0, 131074, 458796, 0, 65536, 524288, 0, 65538, 524332, 0, 65536, 589824, 0, 262144, 589825, 0, 1, 589826, 0, 1, 589827, 0, 1, 589828, 0, 1, 589829, 0, 1, 589830, 0, 1, 589831, 0, 1, 589832, 0, 1, 589833, 0, 1, 589834, 0, 1, 589835, 0, 1, 589836, 0, 1, 589837, 0, 1, 589838, 0, 1, 589839, 0, 1, 589840, 0, 1, 589841, 0, 1, 589842, 0, 1, 589843, 0, 1, 589844, 0, 1, 589845, 0, 1, 589846, 0, 1, 589847, 0, 1, 589848, 0, 1, 589849, 0, 1, 589850, 0, 1, 589851, 0, 2, 589861, 0, 0, 589862, 0, 1, 589863, 0, 1, 589864, 0, 1, 589865, 0, 1, 589866, 0, 1, 589867, 0, 1, 589868, 0, 262145, 655366, 0, 65537, 655367, 0, 65537, 655377, 0, 65537, 655387, 0, 65538, 655397, 0, 65536, 655398, 0, 65537, 655401, 0, 65537, 720922, 0, 65537, 720923, 0, 65538, 720933, 0, 65536, 786459, 0, 65538, 786466, 0, 0, 786467, 0, 1, 786468, 0, 1, 786469, 0, 262145, 851995, 0, 65538, 852002, 0, 65536, 852003, 0, 65537, 917531, 0, 262144, 917532, 0, 1, 917533, 0, 1, 917534, 0, 1, 917535, 0, 1, 917536, 0, 1, 917537, 0, 1, 917538, 0, 262145, 983070, 0, 65537 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="Candle" type="Sprite" parent="."]
-position = Vector2( 161, 88 )
-texture = ExtResource( 3 )
-
-[node name="Candle2" type="Sprite" parent="."]
-position = Vector2( 384, 88 )
-texture = ExtResource( 3 )
-
-[node name="Candle3" type="Sprite" parent="."]
-position = Vector2( 504, 192 )
-texture = ExtResource( 3 )
-
 [node name="doorway" type="Sprite" parent="."]
 position = Vector2( 648, 120 )
 texture = ExtResource( 5 )
-
-[node name="old" type="Sprite" parent="."]
-modulate = Color( 0.831373, 0.74902, 0.74902, 1 )
-position = Vector2( 616, 136 )
-texture = ExtResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 584, 168 )
@@ -82,3 +76,44 @@ limit_top = 0
 limit_right = 704
 limit_bottom = 256
 editor_draw_limits = true
+
+[node name="Candle" parent="." instance=ExtResource( 7 )]
+position = Vector2( 160, 88 )
+
+[node name="Candle2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 344, 88 )
+
+[node name="Candle3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 496, 176 )
+
+[node name="DialogSpots" type="Node2D" parent="."]
+
+[node name="Platform" type="Area2D" parent="DialogSpots"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogSpots/Platform"]
+position = Vector2( 88, 100 )
+shape = SubResource( 3 )
+
+[node name="OldNPC" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="OldNPC"]
+self_modulate = Color( 0.627451, 0.521569, 0.521569, 1 )
+position = Vector2( 616, 137 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OldNPC"]
+position = Vector2( 632, 136 )
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="OldNPC"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OldNPC/Area2D"]
+position = Vector2( 616, 136 )
+shape = SubResource( 5 )
+
+[node name="ConvoCooldown" type="Timer" parent="OldNPC"]
+wait_time = 10.0
+one_shot = true
+[connection signal="body_entered" from="DialogSpots/Platform" to="." method="_on_Platform_body_entered"]
+[connection signal="body_entered" from="OldNPC/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="OldNPC/ConvoCooldown" to="." method="_on_ConvoCooldown_timeout"]

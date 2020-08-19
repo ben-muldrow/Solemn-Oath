@@ -3,6 +3,7 @@ extends State
 var direction = Vector2()
 onready var jumpBuffer = Timer.new()
 var jumpBufferTime = .1 # how long the jump input lasts
+onready var CharacterManager = get_node("../../CharacterManager")
 
 func _init():
 	isActive = false
@@ -11,7 +12,7 @@ func _init():
 	pass
 
 func _ready():
-	sprite = owner.get_node("PlayerSprite")
+	sprite = CharacterManager.getSprite()
 	jumpBuffer.one_shot = true
 	add_child(jumpBuffer)
 	jumpBuffer.connect("timeout", self, "_onBufferTimeout")
@@ -31,17 +32,8 @@ func _physics_process(delta):
 		owner.direction = direction
 		if (!jumpBuffer.time_left > 0 && owner.is_on_floor()):
 			emit_signal("complete")
-		elif (direction.x < 0 && !sprite.flip_h):
-			onFlip()
-		elif (direction.x > 0 && sprite.flip_h):
-			onFlip()
-
 func onExit():
 	.onExit()
-	pass
-
-func onFlip():
-	.onFlip()
 	pass
 
 func _onBufferTimeout():

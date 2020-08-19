@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/textures/soul.png" type="Texture" id=1]
+[ext_resource path="res://Resources/ExplodyLight.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.582278, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.59
+emission_shape = 2
+emission_box_extents = Vector3( 2, 2, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 1.0
+angular_velocity = 99.31
+orbit_velocity = 0.0
+orbit_velocity_random = 1.0
+linear_accel = -41.38
+damping = 79.31
+damping_random = 0.12
+scale_random = 0.46
+scale_curve = SubResource( 2 )
+
+[node name="ExplodyLight" type="Particles2D"]
+amount = 20
+explosiveness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

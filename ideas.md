@@ -16,23 +16,18 @@ Classes:
   - charisma
   - poor movement, no jump, no combat, low health
   - is effectively useless, but can talk to people
-  - sloth
 - duck
   - flight
   - can flutter, decent jump, low health
-  - wrath
 - chonker
   - health
   - low mobility, high health, no combat, no jump
-  - gluttony
 - archer
   - mage
   - high mobility, high jump, no combat, low health
-  - pride
 - the King
   - the chosen one
   - will only speak to 'old'
-  - greed
 
 
 puzzles that must be solved:
@@ -87,15 +82,15 @@ features
 - levels (tutorial -> world)
 
 Priorities:
-- set up tilemap
+- [ x ] set up tilemap
 - set up player scene
   - soul manager (each soul is a different "state")
-  - state manager ( movement )
-  - animation player
+  - [ x ]state manager ( movement )
+  - [ x ]animation player
     - animate sprites via rotation
-- set up camera
+- [ x ]set up camera
 - world design
-  - tutorial
+  - [ x ]tutorial
   - main world
 - dialog
   - file I/O

@@ -15,3 +15,5 @@ func process_input():
 	if (Input.is_action_just_pressed("jump")):
 		emit_signal("player_jump")
 	
+	if (Input.is_action_just_pressed("special")):
+		emit_signal("player_special")
