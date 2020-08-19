@@ -581,31 +581,25 @@ occluder = SubResource( 1 )
 visible = false
 texture = ExtResource( 1 )
 hframes = 2
-frame = 1
 
 [node name="OldSprite" type="Sprite" parent="Sprites"]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 11 )
 
 [node name="DuckSprite" type="Sprite" parent="Sprites"]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 12 )
 
 [node name="ChonkSprite" type="Sprite" parent="Sprites"]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 10 )
 
 [node name="ArcherSprite" type="Sprite" parent="Sprites"]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 9 )
 
 [node name="KingSprite" type="Sprite" parent="Sprites"]
 visible = false
-position = Vector2( 0, -1 )
 texture = ExtResource( 8 )
 
 [node name="smallBox" type="CollisionShape2D" parent="."]
@@ -665,6 +659,7 @@ cast_to = Vector2( 0, -10 )
 [connection signal="change_hitbox" from="CharacterManager" to="." method="_on_CharacterManager_change_hitbox"]
 [connection signal="complete" from="StateManager/Walk" to="StateManager" method="_on_Walk_complete"]
 [connection signal="complete" from="StateManager/Jump" to="StateManager" method="_on_Jump_complete"]
+[connection signal="player_interact" from="InputManager" to="." method="_on_InputManager_player_interact"]
 [connection signal="player_jump" from="InputManager" to="StateManager" method="_on_InputManager_player_jump"]
 [connection signal="player_move" from="InputManager" to="StateManager" method="_on_InputManager_player_move"]
 [connection signal="player_special" from="InputManager" to="." method="_on_InputManager_player_special"]

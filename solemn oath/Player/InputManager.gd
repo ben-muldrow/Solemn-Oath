@@ -17,3 +17,7 @@ func process_input():
 	
 	if (Input.is_action_just_pressed("special")):
 		emit_signal("player_special")
+	
+	if (Input.is_action_just_pressed("interact")):
+		print('eee')
+		emit_signal("player_interact")

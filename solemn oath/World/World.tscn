@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Resources/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/textures/doorway.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/colored_transparent_packed.png" type="Texture" id=6]
 [ext_resource path="res://World/Candle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/textures/soul.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/lightOrb.png" type="Texture" id=9]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -26,6 +28,66 @@ extents = Vector2( 23, 136 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 20, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 24, 24 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 9, 0 )
+initial_velocity = 14.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 78.87
+scale = 0.8
+scale_random = 0.51
+scale_curve = SubResource( 9 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "SpiritAnimation"
+length = 1.2
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 2 ), Vector2( -2, 3 ), Vector2( -3, -1 ), Vector2( -1, -4 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Sprite:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6, 1.2 )
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -112,8 +174,41 @@ position = Vector2( 616, 136 )
 shape = SubResource( 5 )
 
 [node name="ConvoCooldown" type="Timer" parent="OldNPC"]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
+
+[node name="SpiritNPC" type="Node2D" parent="."]
+visible = false
+position = Vector2( 480, 192 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpiritArea2D" type="Area2D" parent="SpiritNPC"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpiritNPC/SpiritArea2D"]
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="SpiritNPC"]
+position = Vector2( -1.73025, -3.52514 )
+scale = Vector2( 1.08228, 1.08228 )
+texture = ExtResource( 8 )
+
+[node name="Particles2D" type="Particles2D" parent="SpiritNPC/Sprite"]
+pause_mode = 2
+position = Vector2( 0.00491333, 0.0201416 )
+scale = Vector2( 0.999996, 0.999996 )
+emitting = false
+process_material = SubResource( 10 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpiritNPC"]
+pause_mode = 2
+playback_process_mode = 0
+anims/SpiritAnimation = SubResource( 7 )
+[connection signal="interact" from="Player" to="." method="_on_Player_interact"]
 [connection signal="body_entered" from="DialogSpots/Platform" to="." method="_on_Platform_body_entered"]
 [connection signal="body_entered" from="OldNPC/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="OldNPC/Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="OldNPC/ConvoCooldown" to="." method="_on_ConvoCooldown_timeout"]
+[connection signal="body_entered" from="SpiritNPC/SpiritArea2D" to="." method="_on_SpiritArea2D_body_entered"]

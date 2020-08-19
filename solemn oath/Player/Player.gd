@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal change_character()
+signal interact()
 
 var direction = Vector2.ZERO
 var velocity = Vector2.ZERO
@@ -88,3 +89,7 @@ func _on_CharacterManager_change_hitbox(small):
 
 func _on_InputManager_player_special():
 	changeCharacter()
+
+
+func _on_InputManager_player_interact():
+	emit_signal("interact")

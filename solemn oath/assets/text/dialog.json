@@ -5,8 +5,7 @@
       [
         "It is very good to see you again, old freind...",
         "Have you forgotten...",
-        "Everything...",
-        "?"
+        "Everything..."
       ],
       "Old": 
       [
@@ -25,11 +24,9 @@
       [
         "I'm afraid I cannot allow you to -",
         "That look... I've seen others like you before...",
-        "So long... I barely remember -"
-      ],
-      "Tutorial":
-      [
-        "Press E to Interact"
+        "So long... I barely remember -",
+        "What is this feeling?",
+        "[[Press E to interact]]"
       ]
     }
   }

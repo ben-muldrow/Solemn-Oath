@@ -47,6 +47,5 @@ func exit():
 	Global.unPause()
 
 func _on_Cooldown_timeout():
-	print('uh oh')
 	canContinue = true
 	$ContinueButton.visible = true
